@@ -34,6 +34,7 @@ p {
 
 /* Listas */
 ul {
+    font-size: 2em;
     list-style-type: square;
     padding-left: 20px;
     margin: 20px 0;
