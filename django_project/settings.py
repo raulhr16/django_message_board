@@ -1,5 +1,6 @@
 from pathlib import Path
 from environs import Env  # new
+import os
 
 env = Env()  # new
 env.read_env()  # new
@@ -17,7 +18,7 @@ SECRET_KEY = "django-insecure-!i1taz@my6u5yr09vw75lg*qo=d-**lr_#!!^r5t9(0oo2&t35
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [ ]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -69,9 +70,11 @@ WSGI_APPLICATION = "django_project.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    "default": env.dj_db_url("DATABASE_URL", default="sqlite:///db.sqlite3"),
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -95,7 +98,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "es-ES"
 
 TIME_ZONE = "UTC"
 
@@ -108,7 +111,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"  # new
 
 # Default primary key field type
